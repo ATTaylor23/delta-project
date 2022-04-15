@@ -19,6 +19,8 @@ public class hotelTests extends TestBase{
 
         js.executeScript("arguments[0].click", hotelPage.shopHotelsBtn);
 
+        driver.manage().window().maximize();
+
 
 
     }
