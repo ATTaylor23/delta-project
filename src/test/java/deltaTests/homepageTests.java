@@ -71,7 +71,7 @@ public class homepageTests extends TestBase {
         WebElement actualName = driver.findElement(By.xpath("//span[contains(text(), 'Basic Info') and @class ='standard-enrollment__section-title--number1']"));
         Assert.assertEquals(true, actualName.isDisplayed());
         System.out.println("Test is Passed");
-        System.out.println("Hello");
+        System.out.println("Hello1");
     }
 
 
