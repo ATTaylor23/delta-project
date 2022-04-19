@@ -11,6 +11,11 @@
         </packages>
 
     </test>
+    <test name="HelpCenterPage">
+        <classes>
+            <class name="pages.HelpCenterPage.FindTravelRequirementsTests"></class>
+        </classes>
+    </test>
 
 </suite>
 
