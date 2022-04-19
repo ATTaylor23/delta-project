@@ -29,7 +29,7 @@ public class hotelTests extends TestBase{
 
 
 
-    @Test   (groups = {"hotel"})
+    @Test   (priority = 3, groups = "hotel")
     public void verifyShopHotelsButton() throws InterruptedException {
         HotelPage hotelPage = new HotelPage();
 
@@ -59,7 +59,7 @@ public class hotelTests extends TestBase{
 
     }
 
-    @Test   (groups = {"hotel"})
+    @Test   (priority = 1, groups = "hotel")
     public void verifyDeltaHotelsURL(){
 
         driver.get(PropertyReader.getProperties("urlHotel"));
@@ -69,7 +69,7 @@ public class hotelTests extends TestBase{
 
     }
 
-    @Test   (groups = {"hotel"})
+    @Test   (priority = 2, groups = "hotel")
     public void verifyAssociateGlobalVariable(){
 
         driver.get(PropertyReader.getProperties("urlHotel"));
