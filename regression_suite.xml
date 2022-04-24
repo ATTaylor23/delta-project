@@ -2,6 +2,23 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="All Tests Suite">
 
+    <test name="HomePage">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        
+    </test>
+    
+    <test name="HomepageClass">
+        <classes>
+            <class name="pages.HomepagePage"></class>
+        </classes>
+    </test>
+    
+    
+    
     <test name="UI Test">
         
         <packages>
@@ -9,8 +26,10 @@
             <package name=".*"/>
 
         </packages>
-
+        
     </test>
+    
+    
     <test name="HelpCenterPage">
         <classes>
             <class name="pages.HelpCenterPage.FindTravelRequirementsTests"></class>
