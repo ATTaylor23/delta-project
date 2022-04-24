@@ -26,8 +26,6 @@ public class helpCenterTests extends TestBase {
     @BeforeMethod
     public void navigateToHelpCenter() throws InterruptedException {
 
-
-
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait( Duration.ofSeconds( 5 ) );
         driver.manage().window().maximize();
@@ -134,7 +132,7 @@ public class helpCenterTests extends TestBase {
 
 
         try {
-            
+
             driver.findElement( By.xpath( "//li[@class='smt-combobox-result smt-combobox-result']" ) ).click();
 
         }catch(NoSuchElementException e){
