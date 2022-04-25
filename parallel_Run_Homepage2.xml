@@ -8,18 +8,9 @@
     </test>
 
 
-    <test name="HomePage">
-        <groups>
-            <run>
-                <include name="smoke"/>
-            </run>
-        </groups>
-
-    </test>
-
     <test name="HomepageClass">
         <classes>
-            <class name="pages.HomepagePage"></class>
+            <class name="deltaTests.homepageTests1"></class>
         </classes>
     </test>
 

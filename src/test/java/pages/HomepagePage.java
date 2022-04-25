@@ -17,34 +17,72 @@ public class HomepagePage {
 
     // Project 2
 
-// instance variables for Advance search Button functionality
-    @FindBy(xpath = "//a[contains(text(),'Advanced Search')]")
+    // instance variables for Advance search Button functionality
+    @FindBy(xpath = "//div//a[@id='adv-search']")
     public WebElement advanceSearch;
 
     @FindBy(xpath = "//input[@id='nearbyAirports']")
     public WebElement ShowFaresButton;
 
-    @FindBy(xpath = "//span[contains(text(),'Basic Economy')]")
-    public WebElement BasicEconomy;
+//    @FindBy(xpath = "//span[contains(text(),'Basic Economy')]")
+//    public WebElement BasicEconomy;
+
+//span//ul[@id='faresFor-desc']//li
+//div//span[@id='faresFor-val']
+
+
+
+
+
+
+
+
 
 
     //  instance variables for Flight Status Button functionality
-    @FindBy(xpath = "//a[@id='headPrimary4']")
+    @FindBy(linkText = "FLIGHT STATUS")
     public WebElement FlightStatusButton;
 
-    // Click calendar after Flight Status
-    @FindBy(id = "input_departureDate_1")
+    // Click calendar button  after Flight Status
+    @FindBy(xpath = "//div[@id='input_departureDate_1']")
     public WebElement CalendarButton;
 
 
     // Click April 30
-    @FindBy(xpath = " //tbody[@class='dl-datepicker-tbody-0']//tr[6]//td[7]//a[@aria-label='30 April 2022, Saturday']")
+    @FindBy(xpath = "//div[@class='dl-datepicker-calendar-cont']//a[@aria-label='30 April 2022, Saturday']")
     public WebElement MonthButton;
 
 
     //Random enter number
     @FindBy(xpath = "//input[@id='flightNo']")
     public WebElement RandomNumber;
+
+    //Click LocationFrom button
+    @FindBy(xpath = "//div[@formgroupname='airports']//a[@id='departcitylink']//span[contains(text(),'From')]")
+    public WebElement LocationFrom;
+
+    // Click LocationToButton
+    @FindBy(xpath = "//div[@formgroupname='airports']//a[@id='arrivalcitylink']//span[contains(text(),'To')]")
+    public WebElement LocationToButton;
+
+ // Send city or country to destination
+    @FindBy(xpath = "//input[@id='search_input']")
+    public WebElement Todestination;
+
+
+    //Click Submit arrow button
+    @FindBy(xpath = "//button[@id='btn-flight-sts-submit']")
+    public WebElement SubmitButton;
+
+
+    //Verification message
+    @FindBy(xpath = "//div[@class='sectioncomponent container first']//h1[1]")
+    public WebElement MessageVerification;
+
+
+
+
+
 
 
     // check Best Fares all name options
@@ -127,69 +165,76 @@ public class HomepagePage {
     public WebElement LName;
 
 
-    @FindBy(xpath = "//button[@id='btn-mytrip-submit']")
-    public WebElement SubmitButton;
+
+
+
+
+
+
+
+
+    // instance methods
+
+    public void loginWithValidCredentials() {
+
+        // Sig Up button
+        SingUp.click();
+
+        // Basic Info button
+        FirstName.sendKeys(PropertyReader.getProperties("Aziza"));
+        LastName.sendKeys(PropertyReader.getProperties("Ahmedova"));
+        nextButton.click();
+
+
+        // Contact Info button
+        contactInfoButton.click();
+        address.sendKeys("1234 N 56 Street");
+        city.sendKeys("Kansas");
+        postalCode.sendKeys("66022");
+        phoneNumber.sendKeys("(816)123-4567");
+        emailAddress.sendKeys("aziza@gmail.com");
+        nextContactButton.click();
+
+        //Login button
+        userName.sendKeys("Azizam09");
+        passWord.sendKeys("Aziza09!");
+        ConfirmPassword.sendKeys("Aziza09!");
+        Answer1.sendKeys("Sizov");
+        Answer2.sendKeys("Tuzik");
+        LoginButton.click();
+
+        // MyTrip button
+        FName.sendKeys("Aziza");
+        LName.sendKeys("Ahmedova");
+        SubmitButton.click();
+
+
+        // Advance search button
+        advanceSearch.click();
+//        BasicEconomy.click();
+        ShowFaresButton.click();
+
+        /*Flight Status Button */
+        FlightStatusButton.click();
+
+
+        // BestFaresAllOptions names DropDown
+        BestFaresAllOptions.click();
+
+        //Verify notification message
+        Notification.getText();
+        CalendarButton.click();
+        MonthButton.click();
+        RandomNumber.click();
+        LocationFrom.click();
+        LocationToButton.click();
+        Todestination.sendKeys("Uzbekistan");
+        SubmitButton.click();
+        MessageVerification.getText();
+    }
+
 
 }
-
-
-   // instance methods
-
-//    public  void loginWithValidCredentials(){
-//
-//        // Sig Up button
-//        SingUp.click();
-//
-//        // Basic Info button
-//        FirstName.sendKeys(PropertyReader.getProperties("Aziza"));
-//        LastName.sendKeys(PropertyReader.getProperties("Ahmedova"));
-//        nextButton.click();
-//
-//
-//        // Contact Info button
-//        contactInfoButton.click();
-//        address.sendKeys("1234 N 56 Street");
-//       city.sendKeys("Kansas");
-//       postalCode.sendKeys("66022");
-//       phoneNumber.sendKeys("(816)123-4567");
-//       emailAddress.sendKeys("aziza@gmail.com");
-//        nextContactButton.click();
-//
-//        //Login button
-//        userName.sendKeys("Azizam09");
-//       passWord.sendKeys("Aziza09!");
-//       ConfirmPassword.sendKeys("Aziza09!");
-//       Answer1.sendKeys("Sizov");
-//       Answer2.sendKeys("Tuzik");
-//       LoginButton.click();
-//
-//       // MyTrip button
-//       FName.sendKeys("Aziza");
-//       LName.sendKeys("Ahmedova");
-//       SubmitButton.click();
-//
-//
-//       // Advance search button
-//        advanceSearch.click();
-//        ShowFaresButton.click();
-//
-//        /*Flight Status Button */
-//        FlightStatusButton.click();
-//
-//
-//        // BestFaresAllOptions names
-//        BestFaresAllOptions.click();
-//
-//        //Verify notification
-//        Notification.getText();
-//        CalendarButton.click();
-//        MonthButton.click();
-//        RandomNumber.click();
-//
-//}
-//
-//
-//
 
 
 
