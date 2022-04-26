@@ -1,81 +1,90 @@
 package deltaTests;
 
-import com.sun.xml.internal.ws.server.DefaultResourceInjector;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import com.github.javafaker.Faker;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.HomepagePage;
+import utilities.Driver;
 import utilities.PropertyReader;
 
-import java.time.Duration;
 import java.util.List;
+import java.util.Random;
+
 
 public class HomepageTests2 extends TestBase {
 
-    @Test
-    public void AdvanceSearchButton() throws InterruptedException {
-        HomepagePage advance = new HomepagePage();
+    WebElement MessageVerification;
+    HomepagePage flightStatusButton = new HomepagePage();
+    Faker faker = new Faker();
+    Actions calendar = new Actions(driver);
 
+
+    @Test
+    public void AdvanceSearchButton() {
         driver.get(PropertyReader.getProperties("urlHome"));
-        logger.info("Click AdvanceSearch");
-        String currentUrl = driver.getCurrentUrl();
-        if (currentUrl.equals("https://www.delta.com/")) {
-            System.out.println("Current URL is: " + currentUrl);
-        } else {
-            System.out.println("Test failed. The current url was " + currentUrl);
-        }
-        Select basicEconom = new Select(advance.BasicEconomy);
-        Actions actions = new Actions(driver);
-        Thread.sleep(2000);
-        if (!advance.advanceSearch.isSelected() && advance.ShowFaresButton.isSelected()) {
-            advance.advanceSearch.click();
-            actions.click(advance.ShowFaresButton).build().perform();
-            basicEconom.selectByIndex(2);
-        } else {
-            System.out.println("Advance search button is not clickable");
-        }
+        flightStatusButton.FlightStatusButton.click();
+        calendar.clickAndHold(flightStatusButton.CalendarButton)
+                .click(flightStatusButton.MonthButton)
+                .click(flightStatusButton.RandomNumber).sendKeys("" + faker.number())
+                .clickAndHold(flightStatusButton.LocationFrom).sendKeys("Dubai")
+                .keyUp(flightStatusButton.LocationFrom, Keys.SHIFT)
+                .clickAndHold(flightStatusButton.LocationToButton)
+                .moveToElement(flightStatusButton.Todestination).sendKeys("Uzbekistan")
+                .keyUp(Keys.SHIFT);
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click()", flightStatusButton.SubmitButton);
+        Assert.assertEquals(MessageVerification.getText(), "Flight Status & Notifications");
     }
 
-    @Test (dependsOnMethods = "AdvanceSearchButton")
-    public void VerifyFaresNames(){
-        logger.info("Check Best Fare options");
-        Select dropdown= new Select(driver.findElement(By.xpath("//select[@id='faresFor']//option[@class='ng-tns-c1-2 ng-star-inserted']")));
-        List<WebElement> options= dropdown.getOptions();
-        for (int i=0; i<options.size();i++){
+
+    @Test
+    public void AdvanceSearchDropDown() {
+        driver.get(PropertyReader.getProperties("urlHome"));
+        flightStatusButton.advanceSearch.click();
+        WebElement button = driver.findElement(By.xpath("//span[contains(text(),'Basic Economy')]"));
+        button.click();
+        WebElement selectOptions = driver.findElement(By.xpath("//span//ul[@id='faresFor-desc']//li"));
+        Select BasicEconomyDropDown = new Select(selectOptions);
+        List<WebElement> options = BasicEconomyDropDown.getOptions();
+        for (int i = 0; i < options.size(); i++) {
             System.out.println(options.get(i).getText());
         }
+    }
+
+
+    @Test
+    public void SearchOptions() {
+        driver.get(PropertyReader.getProperties("urlHome"));
+        List<WebElement> options = driver.findElements(By.xpath("//div[@class='row booking-widget_search-checkbox-section ng-untouched ng-pristine ng-invalid']//label"));
+        Random rand = new Random();
+        int list = rand.nextInt(options.size());
+        options.get(list).click();
 
     }
-        @Test
-        public void FlightStatusButton(){
-
-            driver.get(PropertyReader.getProperties("urlHome"));
-            logger.info("Click FlightStatus button");
-            HomepagePage FlightStatus = new HomepagePage();
-            FlightStatus.FlightStatusButton.click();
-        }
 
 
+    @Test(dataProvider = "enterData")
+    public void SingUp(String firstName,String lastName, String cityName) {
+        driver.get(PropertyReader.getProperties("urlHome"));
+        WebElement signUp = Driver.getDriver().findElement(By.xpath("//a[@class='sign-up btn btn-link']"));
+        calendar.doubleClick(signUp).build().perform();
+        driver.findElement(flightStatusButton.FirstName.sendKeys(firstName,Keys.ENTER);
+        driver.findElement(flightStatusButton.LastName.sendKeys(lastName,Keys.ENTER);
+        driver.findElement(flightStatusButton.address.sendKeys(cityName,Keys.ENTER);
 
- @DataProvider(name="Alloptions",parallel = true)
-    public Object[][]name(){
-        return  new Object[][]{
-                new Object[]{1},
-                new Object[]{2},
-                new Object[]{3},
-                new Object[]{4},
-                new Object[]{5},
-                new Object[]{6},
-
-        };
- }
+    }
 
 
-
-
+@DataProvider
+    public Object[][] enterData(){
+      Object[][]  fillBlank={{""+faker.name().firstName()},{""+faker.name().lastName()},{""+faker.address().cityName()}};
+      return fillBlank;
+}
 
 
 }

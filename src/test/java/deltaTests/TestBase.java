@@ -33,6 +33,7 @@ public class TestBase {
 
         report.setSystemInfo("Name", "Delta Homepage Test Automation results");
         report.setSystemInfo("Browser", PropertyReader.getProperties("browser"));
+        report.setSystemInfo("URL",PropertyReader.getProperties("urlHome"));
     }
 
     @AfterSuite(alwaysRun = true)
@@ -66,7 +67,7 @@ public class TestBase {
             logger.addScreenCaptureFromPath(SeleniumUtils.getScreenshotOnFailure());
         }
 
-//        Driver.quitDriver();
+        Driver.quitDriver();
     }
 
 

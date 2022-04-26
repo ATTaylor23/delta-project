@@ -6,4 +6,30 @@
             <class name="deltaTests.HomepageTests2"></class>
         </classes>
     </test>
+
+
+    <test name="HomepageClass">
+        <classes>
+            <class name="deltaTests.homepageTests1"></class>
+        </classes>
+    </test>
+
+
+
+    <test name="UI Test">
+
+        <packages>
+
+            <package name=".*"/>
+
+        </packages>
+
+    </test>
+
+
+
+
+
+
+
 </suite>
