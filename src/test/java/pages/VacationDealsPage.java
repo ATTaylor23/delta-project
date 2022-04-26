@@ -46,5 +46,14 @@ public class VacationDealsPage {
     @FindBy (xpath = "//li[contains(text(), 'SMEARN75K')]")
     public WebElement spanDropDownSmearn75KOption;
 
+    @FindBy (xpath = "//a[contains(text(), 'designed for SkyMiles Members')]")
+    public WebElement designedForSkyMilesLink;
+
+    @FindBy (linkText = "Earn")
+    public WebElement earnSkyMilesLink;
+
+    @FindBy (linkText = "use")
+    public WebElement useSkuMilesLink;
+
 
 }
