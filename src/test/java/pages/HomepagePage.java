@@ -158,6 +158,12 @@ public class HomepagePage {
 
 
     //   instance variables for MyTrip page
+
+    @FindBy(xpath = " //div[@id='headerLinksContainer']//li[4]")
+    public WebElement MyTripButton;
+
+
+    //div[@id='headerLinksContainer']//li[4]
     @FindBy(xpath = "//div[@class='col-lg-2 offset-md-2 col-md-8 offset-lg-0']//input[@placeholder='First Name']")
     public WebElement FName;
 
@@ -165,6 +171,9 @@ public class HomepagePage {
     @FindBy(xpath = "//div[@class='col-lg-2 offset-md-2 col-md-8 offset-lg-0']//input[@placeholder='Last Name']")
     public WebElement LName;
 
+
+    @FindBy(xpath = "//div[@class='form-row align-items-start']//input[@id='confirmationNo']")
+    public WebElement number;
 
 
 
@@ -205,8 +214,10 @@ public class HomepagePage {
         LoginButton.click();
 
         // MyTrip button
+        MyTripButton.click();
         FName.sendKeys("Aziza");
         LName.sendKeys("Ahmedova");
+        number.click();
         SubmitButton.click();
 
 
