@@ -36,7 +36,7 @@ public class helpCenterTests extends TestBase {
         //Handle the cookies notification:
         driver.findElement( By.xpath( "//button[@class='cookie-close-icon float-right circle-outline']" ) ).click();
         Thread.sleep( 1000 );
-        driver.findElement( By.xpath( "//a[.='Find Travel Requirements']" ) ).click();
+
 
     }
 

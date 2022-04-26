@@ -7,10 +7,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.HomepagePage;
 import utilities.Driver;
 import utilities.PropertyReader;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,14 +20,15 @@ import java.util.Random;
 public class HomepageTests2 extends TestBase {
 
     WebElement MessageVerification;
-    HomepagePage flightStatusButton = new HomepagePage();
+
     Faker faker = new Faker();
-    Actions calendar = new Actions(driver);
+    Actions calendar = new Actions(Driver.getDriver());
 
 
     @Test
     public void AdvanceSearchButton() {
-        driver.get(PropertyReader.getProperties("urlHome"));
+        Driver.getDriver().get(PropertyReader.getProperties("urlHome"));
+        HomepagePage flightStatusButton = new HomepagePage();
         flightStatusButton.FlightStatusButton.click();
         calendar.clickAndHold(flightStatusButton.CalendarButton)
                 .click(flightStatusButton.MonthButton)
@@ -43,24 +46,38 @@ public class HomepageTests2 extends TestBase {
 
 
     @Test
-    public void AdvanceSearchDropDown() {
-        driver.get(PropertyReader.getProperties("urlHome"));
+    public void AdvanceSearchDropDown() throws InterruptedException {
+        Driver.getDriver().get(PropertyReader.getProperties("urlHome"));
+        HomepagePage flightStatusButton = new HomepagePage();
         flightStatusButton.advanceSearch.click();
-        WebElement button = driver.findElement(By.xpath("//span[contains(text(),'Basic Economy')]"));
-        button.click();
-        WebElement selectOptions = driver.findElement(By.xpath("//span//ul[@id='faresFor-desc']//li"));
-        Select BasicEconomyDropDown = new Select(selectOptions);
-        List<WebElement> options = BasicEconomyDropDown.getOptions();
-        for (int i = 0; i < options.size(); i++) {
-            System.out.println(options.get(i).getText());
+       calendar.click(Driver.getDriver().findElement(By.xpath("//span[@id='faresFor-val']")));
+
+
+           List<WebElement>actualName=driver.findElements(By.xpath("//span//ul[@id='faresFor-desc']//li"));
+
+            SoftAssert softAssert= new SoftAssert();
+            Thread.sleep(5000);
+            List<String>expectedName = new ArrayList<>();
+            expectedName.add(0, "Basic Economy");
+            expectedName.add(1, "Main Cabin");
+            expectedName.add(2, "Delta Comfort");
+            expectedName.add(3, "First Class");
+            expectedName.add(4, "Delta Premium Select");
+            expectedName.add(5, "Delta One");
+             for (int i=0; i<actualName.size();i++){
+            softAssert.assertEquals(actualName.get(i).getText(), expectedName.get(i));
         }
-    }
+            softAssert.assertAll();
+
+            //  Select BasicEconomyDropDown = new Select(selectOptions); //  it did not work due to there was not select tag
+        }
 
 
+    //span//ul[@id='faresFor-desc']/li
     @Test
     public void SearchOptions() {
-        driver.get(PropertyReader.getProperties("urlHome"));
-        List<WebElement> options = driver.findElements(By.xpath("//div[@class='row booking-widget_search-checkbox-section ng-untouched ng-pristine ng-invalid']//label"));
+        Driver.getDriver().get(PropertyReader.getProperties("urlHome"));
+        List<WebElement> options = Driver.getDriver().findElements(By.xpath("//div[@class='row booking-widget_search-checkbox-section ng-untouched ng-pristine ng-invalid']//label"));
         Random rand = new Random();
         int list = rand.nextInt(options.size());
         options.get(list).click();
@@ -70,25 +87,29 @@ public class HomepageTests2 extends TestBase {
 
     @Test(dataProvider = "enterData")
     public void SingUp(String firstName,String lastName, String cityName) {
-        driver.get(PropertyReader.getProperties("urlHome"));
+     Driver.getDriver().get(PropertyReader.getProperties("urlHome"));
+        HomepagePage elements = new HomepagePage();
         WebElement signUp = Driver.getDriver().findElement(By.xpath("//a[@class='sign-up btn btn-link']"));
         calendar.doubleClick(signUp).build().perform();
-        driver.findElement(flightStatusButton.FirstName.sendKeys(firstName,Keys.ENTER);
-        driver.findElement(flightStatusButton.LastName.sendKeys(lastName,Keys.ENTER);
-        driver.findElement(flightStatusButton.address.sendKeys(cityName,Keys.ENTER);
+//        driver.findElement(elements.FirstName.sendKeys(firstName);
+//       WebElement element1= Driver.getDriver().findElements(By.xpath(flightStatusButton .LastName.sendKeys(lastName,Keys.ENTER)));
+//
+//        driver.findElement(flightStatusButton.address.sendKeys(cityName,Keys.ENTER);
 
     }
 
 
-@DataProvider
+@DataProvider (parallel = true)
     public Object[][] enterData(){
-      Object[][]  fillBlank={{""+faker.name().firstName()},{""+faker.name().lastName()},{""+faker.address().cityName()}};
+      Object[][]  fillBlank={ {faker.name().firstName(), faker.name().lastName(),faker.address().cityName() },
+        {faker.name().firstName(), faker.name().lastName(),faker.address().cityName() },
+        {faker.name().firstName(), faker.name().lastName(),faker.address().cityName() },
+        {faker.name().firstName(), faker.name().lastName(),faker.address().cityName() }};
       return fillBlank;
 }
 
 
 }
-
 
 
 
