@@ -10,6 +10,12 @@
             </run>
         </groups>
 
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="destination"/>-->
+<!--            </run>-->
+<!--        </groups>-->
+
 
         <packages>
             <package name=".*"/>
