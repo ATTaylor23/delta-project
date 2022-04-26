@@ -34,7 +34,7 @@ public class hotelTests extends TestBase{
 
 
 
-    @Test   (priority = 3, groups = "hotel")
+    @Test   (priority = 3, groups = {"hotel", "smoke"})
     public void verifyShopHotelsButton() throws InterruptedException {
         HotelPage hotelPage = new HotelPage();
 
@@ -48,7 +48,7 @@ public class hotelTests extends TestBase{
 
     }
 
-    @Test   (priority = 1, groups = "hotel")
+    @Test   (priority = 1, groups = {"hotel", "smoke"})
     public void verifyDeltaHotelsURL(){
 
         Driver.getDriver().get(PropertyReader.getProperties("urlHotel"));
@@ -57,7 +57,7 @@ public class hotelTests extends TestBase{
 
     }
 
-    @Test   (priority = 2, groups = "hotel")
+    @Test   (priority = 2, groups = {"hotel", "smoke"})
     public void verifyAssociateGlobalVariable(){
 
         Driver.getDriver().get(PropertyReader.getProperties("urlHotel"));
@@ -66,7 +66,7 @@ public class hotelTests extends TestBase{
 
     }
 
-    @Test   (groups = {"hotel"})
+    @Test   (groups = {"hotel", "smoke"})
     public void verifyChosenLocation() throws InterruptedException {
         Actions actions = new Actions(Driver.getDriver());
         HotelPage hotelPage = new HotelPage();
@@ -86,7 +86,7 @@ public class hotelTests extends TestBase{
 
     }
 
-    @Test   (groups = {"hotel"})
+    @Test   (groups = {"hotel", "smoke"})
     public void negativeBookingConfirmation() throws InterruptedException {
         Faker faker = new Faker();
         Random randy = new Random();
@@ -111,7 +111,7 @@ public class hotelTests extends TestBase{
 
     }
 
-    @Test   (groups = {"hotel"})
+    @Test   (groups = {"hotel", "smoke"})
     public void verifyCalendarLimit() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(5));
         String city = "Miami";
@@ -143,7 +143,7 @@ public class hotelTests extends TestBase{
     }
     // Verifying a successful path to the personal information consent page
 
-    @Test   (groups = {"hotel"})
+    @Test   (groups = {"hotel", "smoke"})
     public void personalInfoConsent() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 
@@ -165,7 +165,7 @@ public class hotelTests extends TestBase{
     }
     // Choose "DO NOT" option and validate its success
 
-    @Test   (groups = {"hotel"})
+    @Test   (groups = {"hotel", "smoke"})
     public void DNSMPInfo() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 
@@ -188,7 +188,7 @@ public class hotelTests extends TestBase{
     }
     // Modify room details on the hotel page and select "Search", validating a new page appears
 
-    @Test   (groups = {"hotel"})
+    @Test   (groups = {"hotel", "smoke"})
     public void moreRoomOptions() throws InterruptedException {
         HotelPage hotelPage = new HotelPage();
 
@@ -221,7 +221,7 @@ public class hotelTests extends TestBase{
     }
     //Find the hotel page, switch tabs and remove the COVID-19 alert
 
-    @Test   (groups = {"hotel"})
+    @Test   (groups = {"hotel", "smoke"})
     public void covidAlertRemoval() throws InterruptedException {
         HotelPage hotelPage = new HotelPage();
 
@@ -235,7 +235,7 @@ public class hotelTests extends TestBase{
     }
     //Open the hotels page, switch tabs, change currency, and validate its presence
 
-    @Test   (groups = {"hotel"})
+    @Test   (groups = {"hotel", "smoke"})
     public void switchingCurrency() throws InterruptedException {
         HotelPage hotelPage = new HotelPage();
 
@@ -251,7 +251,7 @@ public class hotelTests extends TestBase{
     }
     // Validate a secondary path from the homepage to the hotel page
 
-    @Test
+    @Test   (groups = {"hotel", "smoke"})
     public void validate2ndPath(){
         HotelPage hotelPage = new HotelPage();
 
@@ -261,7 +261,7 @@ public class hotelTests extends TestBase{
     }
     // Validate secondary path through half-screen
 
-    @Test
+    @Test   (groups = {"hotel", "smoke"})
     public void validateThruHalfScreen(){
         HotelPage hotelPage = new HotelPage();
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
@@ -279,7 +279,7 @@ public class hotelTests extends TestBase{
     }
     //Hotel booking found through Apartments image link
 
-    @Test (groups = {"destination"})
+    @Test (groups = {"destination", "smoke", "hotel"})
     public void apartments(){
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         HotelPage hotelPage = new HotelPage();
@@ -304,7 +304,7 @@ public class hotelTests extends TestBase{
     }
     //Hotel booking found through Country Retreats image link
 
-    @Test (groups = {"destination"})
+    @Test (groups = {"destination", "smoke", "hotel"})
     public void countryRetreats(){
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         HotelPage hotelPage = new HotelPage();
@@ -332,7 +332,7 @@ public class hotelTests extends TestBase{
     }
     //Hotel booking found through Resorts image link
 
-    @Test (groups = {"destination"})
+    @Test (groups = {"destination", "smoke", "hotel"})
     public void resorts(){
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         HotelPage hotelPage = new HotelPage();
@@ -356,7 +356,7 @@ public class hotelTests extends TestBase{
     }
     //Hotel booking found through Hotels image link
 
-    @Test (groups = {"destination"})
+    @Test (groups = {"destination", "smoke", "hotel"})
     public void hotels(){
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         HotelPage hotelPage = new HotelPage();
@@ -382,7 +382,7 @@ public class hotelTests extends TestBase{
     }
     //Hotel booking found through Vacation Homes image link
 
-    @Test (groups = {"destination"})
+    @Test (groups = {"destination", "smoke", "hotel"})
     public void vacationHomes(){
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         HotelPage hotelPage = new HotelPage();
@@ -407,7 +407,7 @@ public class hotelTests extends TestBase{
     }
     //Hotel booking found through City Homes image link
 
-    @Test (groups = {"destination"})
+    @Test (groups = {"destination", "smoke", "hotel"})
     public void cityHomes(){
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         HotelPage hotelPage = new HotelPage();
